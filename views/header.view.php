@@ -1,7 +1,3 @@
-<?php
-    var_dump($_SESSION);
-
-?>
 <html>
     <head>
         <title>Libreria Arboleda 1.0</title>
@@ -17,7 +13,7 @@
                     <b>Nº de productos en el carrito: 0</b>
                 </td>
                 <td align = "right" rowspan = "2" width = "135">
-                    <img src="images/CARRITO_DE_COMPRAS.gif" width="135" border="0"/> 
+                    <a href="carrito.php"><img src="images/CARRITO_DE_COMPRAS.gif" width="135" border="0"/> </a>
                 </td>
             </tr>
             <tr>
