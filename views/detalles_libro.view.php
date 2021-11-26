@@ -29,7 +29,7 @@
 <hr />
 <table align="center" width="35%">
     <tr>
-        <td><?= Funcion::GET_img("carrito.php", 'isbn', $articulo['isbn'], 'images/Agregar_al_carrito.png', NULL) ?></td>
+        <td><?= Funcion::GET_img("carrito.php", 'nuevo', $articulo['isbn'], 'images/Agregar_al_carrito.png', NULL) ?></td>
         <td><?= Funcion::GET_img("libros_cat.php", 'cat', $articulo['id_categoria'], 'images/volver_home.jpg', NULL) ?></td>
     </tr>
 </table>
