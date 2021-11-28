@@ -69,7 +69,7 @@
 		</td>
 		<td>
 			<?php if (!isset($aviso)){
-				echo'<img align="rigth" src="images/hacer_pedido.jpg" border="0" title="Hacer el Pedido" />';
+				echo '<a href="pedido.php"><img align="rigth" src="images/hacer_pedido.jpg" border="0" title="Hacer el Pedido" /></a>';
 			}?>
 		</td>
 	</tr>
@@ -77,3 +77,8 @@
 </body>
 
 </html>
+
+<?php
+
+$_SESSION['cantidad'] = $cantidad_libros;
+$_SESSION['importe'] = $total;
