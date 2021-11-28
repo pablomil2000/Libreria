@@ -22,6 +22,10 @@ class Carrito{
         $_SESSION["total"]=$total;
     }
     public function sacar_cantidad(){
-        $_SESSION["cant"]=array_sum($_SESSION["carrito"]);
+        if (isset($_SESSION["carrito"])) {
+            $_SESSION["cant"]=array_sum($_SESSION["carrito"]);
+        }else {
+            $_SESSION['cant']=0;
+        }
     }
 }

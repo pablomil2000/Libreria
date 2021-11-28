@@ -1,8 +1,8 @@
 <?php
+session_start();
 include_once("class/Funciones.php");
 include_once("class/Libro.php");
 include_once("class/Carrito.php");
-session_start();
     $validacion = new Funcion;
     $carrito = new Carrito();
     $libro = new Libro();
@@ -43,12 +43,18 @@ session_start();
                     unset($_SESSION["carrito"][$isbn]);
                 endif;
             endif;
+
+            if (empty($_SESSION["carrito"])) {
+                unset($_SESSION["carrito"]);
+            }
+
+            
             header("location:carrito.php");
         }
     /*   SACAR PRODUCTOS DEL CARRITO   */
     $ids = $carrito->devolver_ids_carrito();
     if($ids == null) $ids = "(0)";
-    $libros = $libro->GetLibros_isbn($ids);
-    $carrito->sacar_precio($libros);
-    $carrito->sacar_cantidad();
+        $libros = $libro->GetLibros_isbn($ids);
+        $carrito->sacar_precio($libros);
+        $cantidad = $carrito->sacar_cantidad();
 require_once('views/carrito.view.php');

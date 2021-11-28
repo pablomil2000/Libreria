@@ -14,40 +14,49 @@
 		<th>Eliminar</th>
 		<th>Actualizar</th>
 	</tr>
-	<form method="post">
+	
 		<?php
-		
-		foreach($_SESSION["carrito"] as $isbn => $cantidad) {
-			$libros = $libro->GetLibros_isbn($isbn);
-			?>
-			<tr>
-			<td align="left">
-				<img src="<?=$libros[0]['imagen']?>" border="0" height="75" width="55" />
-			</td>
-			<td align="left"><?=$libros[0]['titulo']?></td>
-			<td align="center"><?=$libros[0]['precio']?> € </td>
-			<td align="center">
-				<input type="text" name="cantidad" size="2" value="<?=$cantidad?>" />
-			</td>
-			<td align="center"><?=$cantidad*$libros[0]['precio']?> € </td>
-			<td align="center">
-				<a href="carrito.php?del=<?=$isbn?>"><img src="images/trash.gif" width="25" height="35" border="0"/></a>
-			</td>
-			<td align="center">
-				<input type="hidden" name="isbn" value='<?=$isbn?>'>
-				<input type="image" name="image" src="images/actualizar.gif" width="25" height="25" />
-			</td>
-		</tr>
-			<?php
-		}
-		
+		$total =0;
+		$cantidad_libros = 0;
+		if (!isset($_SESSION["carrito"])) {
+			echo "<td colspan='7' style='text-align:center'><h1>No hay productos en el carrito</h1></td>";
+			$aviso = 1;
+		} else {
+			foreach ($_SESSION["carrito"] as $isbn => $cantidad) {
+				$libros = $libro->GetLibros_isbn($isbn);
+				$total += $cantidad * $libros[0]['precio'];
+				$cantidad_libros +=$cantidad;
 		?>
-		
-	</form>
+			<form method="post">
+				<tr>
+					<td align="left">
+						<img src="<?= $libros[0]['imagen'] ?>" border="0" height="75" width="55" />
+					</td>
+					<td align="left"><?= $libros[0]['titulo'] ?></td>
+					<td align="center"><?= $libros[0]['precio'] ?> € </td>
+					<td align="center">
+						<input type="text" name="cantidad" size="2" value="<?= $cantidad ?>" />
+					</td>
+					<td align="center"><?= $cantidad * $libros[0]['precio'] ?> € </td>
+					<td align="center">
+						<a href="carrito.php?del=<?= $isbn ?>"><img src="images/trash.gif" width="25" height="35" border="0" /></a>
+					</td>
+					<td align="center">
+						<input type="hidden" name="isbn" value='<?= $isbn ?>'>
+						<input type="image" name="image" src="images/actualizar.gif" width="25" height="25" />
+					</td>
+				</tr>
+				</form>
+		<?php
+			}
+		}
+		?>
+
+	
 	<tr>
 		<th colspan="3" align="right">Totales:</th>
-		<th align="center">3</th>
-		<th align="center">85.40 €</th>
+		<th align="center"><?=$cantidad_libros?></th>
+		<th align="center"><?=$total?> €</th>
 		<th></th>
 		<th></th>
 	</tr>
@@ -56,10 +65,12 @@
 <table align="center" width="40%">
 	<tr>
 		<td>
-			<img align="left" src="images/seguir_comprando.png" border="0" title="Continuar Comprando" />
+			<a href="index.php"><img align="left" src="images/seguir_comprando.png" border="0" title="Continuar Comprando" /></a>
 		</td>
 		<td>
-			<img align="rigth" src="images/hacer_pedido.jpg" border="0" title="Hacer el Pedido" />
+			<?php if (!isset($aviso)){
+				echo'<img align="rigth" src="images/hacer_pedido.jpg" border="0" title="Hacer el Pedido" />';
+			}?>
 		</td>
 	</tr>
 </table>
