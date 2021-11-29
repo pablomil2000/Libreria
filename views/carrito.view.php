@@ -68,8 +68,12 @@
 			<a href="index.php"><img align="left" src="images/seguir_comprando.png" border="0" title="Continuar Comprando" /></a>
 		</td>
 		<td>
-			<?php if (!isset($aviso)){
-				echo '<a href="pedido.php"><img align="rigth" src="images/hacer_pedido.jpg" border="0" title="Hacer el Pedido" /></a>';
+			<?php if (!isset($aviso) && isset($_SESSION['rol']) && $_SESSION['rol'] != 'Admin'){
+
+				?> 
+				<a href="cancelar.php"><img height="40px" align="rigth" src="images/cancelar_pedido.jpg" border="0" title="Cancelar" /></a>
+				<a href="guardar.php"><img height="40px" align="rigth" src="images/guardar_carrito.jpg" border="0" title="Guardar" /></a>
+				<a href="pedido.php"><img align="rigth" src="images/hacer_pedido.jpg" border="0" title="Hacer el Pedido" /></a><?php
 			}?>
 		</td>
 	</tr>

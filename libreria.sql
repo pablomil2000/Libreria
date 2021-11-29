@@ -89,9 +89,26 @@ INSERT INTO `libros` (`isbn`, `titulo`, `descripcion`, `precio`, `autor`, `id_ca
 
 CREATE TABLE `pedidos` (
   `id` int(11),
-  importe varchar(6)
+  importe varchar(6),
+  estado varchar(20),
+  fecha timestamp,
+  Usuario int(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+CREATE TABLE IF NOT EXISTS Usuarios(
+  id int AUTO_INCREMENT PRIMARY KEY,
+  nombre varchar(100) NOT NULL,
+  pass varchar(200),
+  rol varchar(20)
+);
+
+CREATE TABLE IF NOT EXISTS Carritos(
+  linea_carrito int(11) PRIMARY KEY,
+  usuario int(11),
+  `id_producto` int(11),
+  `cantidad` int(11)
+);
 --
 -- Índices para tablas volcadas
 --

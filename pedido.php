@@ -3,9 +3,10 @@ session_start();
 include_once("class/Funciones.php");
 include_once("class/Carrito.php");
 
-if (!isset($_SESSION["carrito"])) {
+if (!isset($_SESSION["carrito"]) || !is_array($_SESSION["id_usuario"])) {
     header("Location:carrito.php");
 }
+$usuario = $_SESSION["id_usuario"];
 $tabla = "pedidos";
 $tabla2 = 'detallespedido';
 
@@ -13,9 +14,10 @@ $importe = $_SESSION["importe"];
 
 $conexion = Conexion::conectar();
 
-$sql = 'INSERT INTO ' . $tabla . '(importe) VALUES (:importe)';
+$sql = 'INSERT INTO ' . $tabla . '(importe, estado, Usuario) VALUES (:importe, "Pendiente", :usuario)';
 $sentencia = $conexion->prepare($sql);
 $sentencia->bindParam(':importe', $importe);
+$sentencia->bindParam(':usuario', $usuario);
 $resultado = $sentencia->execute();
 
 $sql3 = 'SELECT * FROM '.$tabla.' ORDER BY 1 DESC LIMIT 1';

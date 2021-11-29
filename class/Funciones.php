@@ -17,7 +17,7 @@ class Funcion
         return $cadena;
     }
 
-    public function sanar_datos($campo, $tipo, &$errores, $nombre)
+    public static function sanar_datos($campo, $tipo, &$errores, $nombre)
     {
         if (isset($campo) && !empty($campo)) {
             switch ($tipo) {

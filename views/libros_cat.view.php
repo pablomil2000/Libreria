@@ -8,7 +8,6 @@
 <table width="100%">
 
     <?php
-    // var_dump($articulos);
     if (!empty($articulos)) {
 
         foreach ($articulos as $articulo) {
